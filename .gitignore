@@ -1,0 +1,15 @@
+.DS_Store
+.build/
+dist/
+
+# Machine state, private design working notes and QA evidence
+.codex/
+.impeccable/review/
+.impeccable/config.local.json
+design-review/
+design-demos/
+.env
+.env.*
+!.env.example
+*.pem
+*.key

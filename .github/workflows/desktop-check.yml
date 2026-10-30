@@ -1,0 +1,56 @@
+name: Desktop checks and Mac bundle
+on:
+  workflow_dispatch:
+  push:
+    paths: ['desktop/**', '.github/workflows/desktop-check.yml']
+  pull_request:
+    paths: ['desktop/**', '.github/workflows/desktop-check.yml']
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            target: aarch64-apple-darwin
+            arguments: --target aarch64-apple-darwin --bundles app
+            artifact: macOS-Apple-Silicon
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            arguments: --target x86_64-pc-windows-msvc --no-bundle
+            artifact: Windows-x64
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - run: npm ci
+      - run: npm test
+      - run: cargo test --manifest-path src-tauri/Cargo.toml --locked
+      - run: cargo clippy --manifest-path src-tauri/Cargo.toml --locked --all-targets -- -D warnings
+      - run: npm run tauri -- build ${{ matrix.arguments }}
+      - name: Archive macOS bundle with executable permissions
+        if: runner.os == 'macOS'
+        run: |
+          mkdir -p artifacts
+          codesign --force --deep --sign - "src-tauri/target/aarch64-apple-darwin/release/bundle/macos/LocalDocBrowser Rust.app"
+          codesign --verify --deep --strict "src-tauri/target/aarch64-apple-darwin/release/bundle/macos/LocalDocBrowser Rust.app"
+          ditto -c -k --sequesterRsrc --keepParent "src-tauri/target/aarch64-apple-darwin/release/bundle/macos/LocalDocBrowser Rust.app" artifacts/LocalDocBrowser-macOS-AppleSilicon.zip
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'macOS'
+        with:
+          name: ${{ matrix.artifact }}
+          path: |
+            desktop/artifacts/*.zip
+          if-no-files-found: error

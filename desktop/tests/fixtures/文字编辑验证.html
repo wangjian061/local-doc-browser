@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>文字编辑验证</title><style>
+body { font: 16px/1.8 system-ui; margin: 36px; color: #25312b; } h1 { font-size: 28px; } table { border-collapse: collapse; width: 100%; } td, th { border: 1px solid #cbd5ce; padding: 12px; text-align: left; } strong { color: #27634b; }
+</style></head><body>
+<h1>本地 HTML 文字编辑</h1>
+<p>点击这里修改正文，保存后更新原文件。</p>
+<p>保留<strong>加粗重点</strong>和<a href="./交互页面.html">本地链接</a>的样式。</p>
+<table><tr><th>项目</th><th>数量</th></tr><tr><td>重复文字</td><td>12</td></tr><tr><td>重复文字</td><td>24</td></tr></table>
+<p id="dynamic">脚本替换前</p><script>document.getElementById('dynamic').textContent='动态生成的文字';window.fixtureScriptAlive=true;</script>
+</body></html>

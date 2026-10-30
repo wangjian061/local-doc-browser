@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-read-html-source"
+description = "Enables the read_html_source command without any pre-configured scope."
+commands.allow = ["read_html_source"]
+
+[[permission]]
+identifier = "deny-read-html-source"
+description = "Denies the read_html_source command without any pre-configured scope."
+commands.deny = ["read_html_source"]

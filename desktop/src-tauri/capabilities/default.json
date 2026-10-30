@@ -1,0 +1,30 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-capability",
+  "description": "Client window only; document previews have no native capabilities.",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "core:window:allow-set-fullscreen",
+    "core:window:allow-is-fullscreen",
+    "dialog:allow-open",
+    "allow-load-session",
+    "allow-save-session",
+    "allow-scan-directory",
+    "allow-search-documents",
+    "allow-document-exists",
+    "allow-rename-document",
+    "allow-trash-document",
+    "allow-open-external",
+    "allow-open-document",
+    "allow-reveal-document",
+    "allow-parent-directory",
+    "allow-export-pdf",
+    "allow-read-html-source",
+    "allow-save-html-source",
+    "allow-finish-html-edit",
+    "allow-confirm-app-exit"
+  ]
+}

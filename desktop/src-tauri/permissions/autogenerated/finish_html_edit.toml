@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-finish-html-edit"
+description = "Enables the finish_html_edit command without any pre-configured scope."
+commands.allow = ["finish_html_edit"]
+
+[[permission]]
+identifier = "deny-finish-html-edit"
+description = "Denies the finish_html_edit command without any pre-configured scope."
+commands.deny = ["finish_html_edit"]
