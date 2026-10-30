@@ -40,7 +40,7 @@ Mac Apple Silicon：
 npm run build:mac
 ```
 
-产物在 `artifacts/LocalDocBrowser Rust.app` 与 `artifacts/LocalDocBrowser-0.2.0-macOS-AppleSilicon.zip`，附 SHA-256 校验文件。打包脚本对本地产物进行 ad-hoc 签名并验证资源封装。原始构建位于 `src-tauri/target/aarch64-apple-darwin/release/bundle/macos/LocalDocBrowser Rust.app`。本地构建使用独立名称和标识，方便与旧版共存。未使用 Apple Developer 证书签名或公证；当前以本机构建与使用为目标。
+产物在 `artifacts/LocalDocBrowser Rust.app` 与 `artifacts/LocalDocBrowser-0.2.1-macOS-AppleSilicon.zip`，附 SHA-256 校验文件。打包脚本对本地产物进行 ad-hoc 签名并验证资源封装。原始构建位于 `src-tauri/target/aarch64-apple-darwin/release/bundle/macos/LocalDocBrowser Rust.app`。本地构建使用独立名称和标识，方便与旧版共存。未使用 Apple Developer 证书签名或公证；当前以本机构建与使用为目标。
 
 Windows 从源码拉取、启动和检查见 [WINDOWS.md](WINDOWS.md)。本次不生成 Windows 安装包；GitHub Actions 对 Windows 运行测试及 `tauri build --no-bundle`，Mac 构建 `.app`。
 

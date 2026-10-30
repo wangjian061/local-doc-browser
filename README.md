@@ -2,7 +2,7 @@
 
 本地 HTML／Markdown 阅读器。HTML 可以在页面上选中文字，用底部抽屉修改，并直接保存回同一个本地文件。
 
-当前应用版本：**0.2.0**。新版源码位于 [`desktop/`](desktop/)，使用 Tauri 2 + Rust + React + shadcn/ui；根目录保留旧版 SwiftUI 工程。
+当前应用版本：**0.2.1**。新版源码位于 [`desktop/`](desktop/)，使用 Tauri 2 + Rust + React + shadcn/ui；根目录保留旧版 SwiftUI 工程。
 
 - [Windows 拉取与运行](desktop/WINDOWS.md)
 - [完整功能、启动和 Mac 打包](desktop/README.md)

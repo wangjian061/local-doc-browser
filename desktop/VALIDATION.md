@@ -104,3 +104,14 @@ SHA-256：`c0ab4e50b8a0976497454d51cab9efd06f6e0dbc4dc2fd1e1aba850f9aaac050`。
 SHA-256：`b197200efac0b2b0439a0023010b0d0a76f5a51ffb06cd6430e0f0c7c332b7b8`。
 
 本轮 Git 提交、远端地址、版本标签与交付范围见根目录 `DELIVERY.md`；CI 结果以 GitHub Actions 的实际运行记录为准。
+
+## Windows 路径兼容修复（2026-10-30，0.2.1）
+
+首次 GitHub CI 中，Windows 前端测试通过，Rust 中重命名测试失败：标准库返回的 `\\?\` 目录前缀与文档扫描使用的普通盘符路径格式不同，导致相同目录被范围检查拒绝。现对范围检查的根目录与文件路径都先做 `dunce::canonicalize`，保留原有目录边界限制；没有跳过或删除失败测试。
+
+本地 Rust 17 项（含重命名、目录越界与符号链接）、Clippy all-targets、TypeScript/Vite、Mac release 与签名校验再次通过。前端功能代码未变化，25 项测试由前一轮与后续 CI 覆盖。CI 仅在 main 分支提交时触发，避免标签推送重复运行相同检查。
+
+0.2.1 当前 Mac ZIP：`artifacts/LocalDocBrowser-0.2.1-macOS-AppleSilicon.zip`，约 13.55 MiB 的 arm64 `.app`。
+SHA-256：`f2995570e75442124ce92e9129bc4252d0a7d1c8603b1abaf99682bbcdee41e4`。
+
+Windows 的复测与两平台编译结果以 0.2.1 提交对应 Actions 记录为准；原生 GUI 验收边界沿用上一节。

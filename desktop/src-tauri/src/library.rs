@@ -285,7 +285,10 @@ pub fn search(lib: &Library, query: &str) -> Vec<Document> {
 }
 pub fn authorized(root: &Path, path: &Path) -> Result<PathBuf, String> {
     let canonical = dunce::canonicalize(path).map_err(|e| format!("文件不存在或无法读取：{e}"))?;
-    if !canonical.starts_with(root) {
+    // Normalize both sides: std::fs may return a Windows \\?\ path while
+    // scanner paths use the regular drive form produced by dunce.
+    let root = dunce::canonicalize(root).map_err(|e| format!("文档目录无法读取：{e}"))?;
+    if !canonical.starts_with(&root) {
         return Err("文件不在当前文档目录中。".into());
     }
     Ok(canonical)

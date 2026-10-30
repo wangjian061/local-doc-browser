@@ -1,6 +1,6 @@
 [package]
 name = "local-doc-browser"
-version = "0.2.0"
+version = "0.2.1"
 description = "Local Markdown and HTML document browser"
 authors = ["Jian Wang"]
 edition = "2021"
